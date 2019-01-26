@@ -1,0 +1,39 @@
+using System;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution
+{
+    static void Main(string[] args)
+    {
+        long r1 = long.Parse(Console.ReadLine());
+        long r2 = long.Parse(Console.ReadLine());
+
+        Dictionary<long,bool> river = new Dictionary<long,bool>();          //Création d'une collection de type Map (parcours rapide, pas de doublons)
+        while (true) {
+            river.Add(r1,true);                                         //clé/valeur = r1/true
+            river.Add(r2,true);                                         //clé/valeur = r2/true
+            r1 = getSum(r1);                                            //appel methode sur r1 pour calcul des sommes
+            r2 = getSum(r2);                                            //appel methode sur r2 pour calcul des sommes
+            if (river.ContainsKey(r1)) {Console.WriteLine(r1);return;} //si r1 rencontre la riviere, retourne r1
+            if (river.ContainsKey(r2)) {Console.WriteLine(r2);return;} //si r2 rencontre la riviere, retourne r2
+        }
+    }
+    
+    static long getSum(long num) {
+        long sum = num;                                                 //num = r1 ou r2
+        while (num>0) {                                                 
+            sum+=num%10;                                                //récupération du dernier digit de num et ajout à sum
+            num/=10;                                                    //récupération de la partie restante
+        }
+        return sum;                                                     //retourne valeur de num + la somme de ses digits
+    }
+    
+}
