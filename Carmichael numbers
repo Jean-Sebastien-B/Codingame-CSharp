@@ -1,0 +1,73 @@
+using System;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution
+{
+    static void Main(string[] args)
+    {
+        int n = int.Parse(Console.ReadLine());
+
+        ArrayList NumberList = new ArrayList();
+        
+        NumberList.Add(561);
+        NumberList.Add(1105);
+        NumberList.Add(1729);
+        NumberList.Add(2465);
+        NumberList.Add(2821);
+        NumberList.Add(6601);
+        NumberList.Add(8911);
+        NumberList.Add(10585);
+        NumberList.Add(15841);
+        NumberList.Add(29341);
+        NumberList.Add(41041);
+        NumberList.Add(46657);
+        NumberList.Add(52633);
+        NumberList.Add(62745);
+        NumberList.Add(63973);
+        NumberList.Add(75361);
+        NumberList.Add(101101);
+        NumberList.Add(115921);
+        NumberList.Add(126217);
+        NumberList.Add(162401);
+        NumberList.Add(172081);
+        NumberList.Add(188461);
+        NumberList.Add(252601);
+        NumberList.Add(278545);
+        NumberList.Add(294409);
+        NumberList.Add(314821);
+        NumberList.Add(334153);
+        NumberList.Add(340561);
+        NumberList.Add(399001);
+        NumberList.Add(410041);
+        NumberList.Add(449065);
+        NumberList.Add(488881);
+        NumberList.Add(512461);
+        NumberList.Add(530881);
+        NumberList.Add(552721);
+        NumberList.Add(656601);
+        NumberList.Add(658801);
+        NumberList.Add(670033);
+        NumberList.Add(748657);
+        NumberList.Add(825265);
+        NumberList.Add(658801);
+        NumberList.Add(852841);
+        NumberList.Add(997633);
+        NumberList.Add(1024651);
+   
+        if (NumberList.Contains(n)) {
+			Console.WriteLine("YES");
+		} else {
+			Console.WriteLine("NO");
+		}
+
+        
+    }
+}
