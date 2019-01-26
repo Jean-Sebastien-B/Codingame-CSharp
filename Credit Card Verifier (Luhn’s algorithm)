@@ -1,0 +1,94 @@
+using System;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution
+{
+    static void Main(string[] args)
+    {
+        int n = int.Parse(Console.ReadLine());
+        for (int i = 0; i < n; i++)
+        {
+            string card = Console.ReadLine();
+            card = card.Replace(" ", "");
+
+            if (!isValidID(card)) // Appel de methode pour vérifier la non-validité de l'ID card
+            {
+                Console.WriteLine("NO");
+            }
+            else
+            {
+                Console.WriteLine("YES");
+            }
+        }
+    }
+
+    // Première étape : vérification de longeur de l'ID (16 digits)
+    private static bool isValidID(String card)
+    {
+
+        if (card.Length == 16)
+        { // Test de longueur 16
+            return isValidID16(card); // Si oui, appel de la methode correspondante
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    // Deuxième étape : ID16 -> Vérification du contenu de la String
+    private static bool isValidID16(String card)
+    {
+        // Somme des digits pairs (index 0 à 14)
+        int OddSum = 0;
+        bool oddIndex = false; // Boolean index pair (index 0 = false)
+
+        for (int i = 0; i < card.Length - 1; i++)
+        {
+            oddIndex = !oddIndex; // Change de valeur à chaque tour de boucle
+            if (oddIndex)
+            {
+                int currentDigit = (card[i] - '0') * 2; // Digit en cours égal à sa valeur numérique * 2
+
+                if (currentDigit > 8)
+                { // soustraction de 9 sur les digits supérieurs à 8
+                    currentDigit = currentDigit - 9;
+                }
+                OddSum += (currentDigit); // Somme des digits après traitements
+            }
+
+        }
+
+        // Somme des digits impairs (index 1 à 15)
+        int EvenSum = 0;
+        bool evenIndex = false; // Boolean index impair (index 0 = false)
+
+        for (int i = 0; i < card.Length; i++)
+        {
+            int currentDigit = card[i] - '0'; // Digit en cours égal à sa valeur numérique - 0
+            EvenSum += (currentDigit - (evenIndex ? 0 : currentDigit)); // Somme des digits selon index
+            evenIndex = !evenIndex; // Change de valeur à chaque tour de boucle
+        }
+
+        int Sum = OddSum + EvenSum;
+
+        if (Sum % 10 == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
+
