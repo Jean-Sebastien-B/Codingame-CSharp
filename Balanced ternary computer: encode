@@ -1,0 +1,78 @@
+using System;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution
+{
+    static void Main(string[] args)
+    {
+        int N = int.Parse(Console.ReadLine());
+        
+        if (N == 0)
+        {
+            Console.WriteLine("0");                                 //le cas 0
+        }
+        else
+        {
+            Console.WriteLine(ConvertToBalancedTernary(N));
+        }
+    }
+
+    public static String ConvertToBalancedTernary(int n)
+    {           //N to String
+        if (n < 0)
+            return BitReverse(ConvertToBalancedTernary(-n));        //inversion de bits avant convert pour obtenir resultat inverse en convertissant N "as a positive number"
+
+        if (n == 0)
+            return "";                                              //évite le zero de départ dans le retour attendu
+
+        int ClassicTernaryN = modulo3(n);                           //modulo 3 pour récupérer chaque décimale en ternaire classique
+
+        if (ClassicTernaryN == 0)
+            return ConvertToBalancedTernary(n / 3) + "0";
+
+        if (ClassicTernaryN == 1)
+            return ConvertToBalancedTernary(n / 3) + "1";
+
+        if (ClassicTernaryN == 2)                                   //cas particulier à gérer pour le 2 : 2 = 1T ...soit 1 de moins sur le bit suivant
+            return ConvertToBalancedTernary((n + 1) / 3) + "T";     //ajoute 1 pour le décalage de bit
+        return "";
+    }
+
+    public static String BitReverse(String str)
+    {                   //méthode d'inversion de bits
+        String bitReverse = "";                                     //string pour stockage du résultat à retourner
+
+        for (int i = 0; i < str.Length; i++)
+        {                   //parcours de la string à inverser
+            if (str[i] == '1')
+                bitReverse += 'T';                                  // 1 = T
+            else if (str[i] == 'T')
+                bitReverse += '1';                                  // T = 1
+            else
+                bitReverse += '0';                                  // 0 = 0
+        }
+        return bitReverse;
+    }
+
+    public static int modulo3(int n)
+    {                               //methode classique de conversion de base
+        int Digit = n % 3;
+
+        if (n > 0)
+        {
+            return Digit;
+        }
+        n = n / 3;
+        return n;
+    }
+
+}
+
