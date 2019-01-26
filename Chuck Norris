@@ -1,0 +1,62 @@
+using System;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution
+{
+	static void Main(string[] args)
+    {
+        string MESSAGE = Console.ReadLine();
+        string binaryMessage = string.Empty;
+        string unaryMessage = string.Empty;
+        foreach (char aByte in MESSAGE)
+        {
+            string lengthCheck = Convert.ToString((int)aByte, 2);   //Converti chaque caractère en entier base 2 (binaire)
+            if (lengthCheck.Length < 7)                             //Sur une longueur de 7 bits
+            {
+                lengthCheck = new string('0', 7- lengthCheck.Length) + lengthCheck; //initialisé à 0
+            }
+            binaryMessage += lengthCheck;                           //récupéré dans la variable binaryMessage
+        }
+        
+        unaryMessage = convertToUnary(binaryMessage);               //appel methode de convertion sur binaryMessage
+        
+        Console.WriteLine(unaryMessage.Trim());                     //Sans l'espace du début de chaine
+        Console.ReadLine();
+    }
+
+	public static string convertToUnary(string binaryString) {
+		char[] binaryArray = binaryString.ToArray();                //Déclaration d'un tableau de caractères (receptionne la string en binaire)
+
+		string unaryString = string.Empty;                          //déclaration de la string en unaire initialisée à vide
+		char lastChar = '\0';                                       //caratère de départ identique à 0 et 1
+		
+		for (int i = 0; i < binaryArray.Length; i++) {              //parcours du tableau
+			char currentChar = binaryArray[i];                      //currentChar prend la valeur de la variable à chaque index parcouru
+			
+			if (lastChar != '1' && currentChar == '1') {
+				unaryString += " 0 0";                              //un 1 suit un 0
+				lastChar = '1';
+			} else if (lastChar == '1' && currentChar == '1') {
+				unaryString += "0";                                 //un 0 de plus pour chaque 1 supplementaire
+			} else if (lastChar != '0' && currentChar == '0') {
+				unaryString += " 00 0";                             //un 0 suit un 1
+				lastChar = '0';
+			} else if (lastChar == '0' && currentChar == '0') {     //un 0 de plus pour chaque 0 supplementaire
+				unaryString += "0";
+			} else {
+				unaryString += "error";
+			}
+
+		}
+		return unaryString;
+
+	}
+}
